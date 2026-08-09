@@ -1,0 +1,52 @@
+---
+title: "AI products fail without a data flywheel — here's the pattern"
+excerpt: "Why AI products die in demo hell, and the feedback loops that turn a clever demo into an actually useful product."
+date: 2026-03-14
+category: ai
+tags: ["ai", "products", "data", "llm"]
+published: true
+---
+
+The pattern is always the same: a beautiful AI demo that professionals applaud, three months of quiet, and then a corpse of a roadmap. AI products decompose when they never get fed real usage data.
+
+Here's the framework I build AI products to survive with.
+
+## The flywheel: usage → data → quality
+
+An AI product must be *better for the tenth user than it was for the second*. That only happens when the pipeline collects:
+
+1. **Prompt and context** for every real request,
+2. **The output** that was actually used,
+3. **The feedback** — thumbs, edits, re-asks, time spent,
+
+…and turns that feedback into improvement. The engineering constraint is plumbing, not intelligence: by the time you're gathering signals from production, the product is already better.
+
+## Start with humans in the loop
+
+Before you talk to "zero-shot autonomy", you build **human-review workflows**: the AI drafts, a human approves, corrections flows back into the training set. This costs nothing, keeps quality high where it matters, and — most importantly — starts the data flywheel in week one, instead of hoping "the data will come later".
+
+## Enumerate what "good" looks like
+
+You cannot improve what you cannot measure. For a checkout-copilot or support-autosuggester, define metrics early:
+
+- acceptance rate of suggested completions,
+- edit distance between draft and final,
+- escalation rate out of AI resolution,
+- time-to-resolution per session.
+
+Each one gives you permission to optimize without wondering.
+
+## The quality budget
+
+The biggest engineering expense in AI products is **hygiene**: filtering bad inputs, deterministic guardrails on the money-path outputs, structured outputs parsing with retries, and a failure mode that degrades to "human asks a form" instead of dead-silent broken.
+
+```ts
+const result = await model.generate(prompt, { structured: aiResponseSchema });
+if (!result.valid) return fallbackManualWorkflow(); // never let AI own the irreversible step
+```
+
+## Keep the loop closed in production
+
+Ship the annotation loop before you ship the polish. Copy buttons, thumbs up/down, "why did this happen" — the features that look boring are the ones making the model honest.
+
+The pattern in one line: **AI products are data products wearing a chat interface.** Build the data engine first, and the demo will turn into a product.

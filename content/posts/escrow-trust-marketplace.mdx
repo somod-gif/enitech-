@@ -1,0 +1,62 @@
+---
+title: "Escrow, trust, and the art of moving money safely"
+excerpt: "How escrow models work, why trust is the product, and the engineering patterns behind a two-sided marketplace."
+date: 2026-04-10
+category: fintech
+tags: ["escrow", "marketplace", "payments", "spring-boot"]
+published: true
+---
+
+A marketplace is a machine for manufacturing trust between strangers. Escrow is the gear that makes the machine run. Here's how I think about building it.
+
+## What escrow actually is
+
+Buyer pays. Funds sit in a **third-party hold**. Seller delivers. Buyer confirms. Funds release. If anything breaks — dispute, cancellation, dead delivery — the hold is where the system can still do the right thing.
+
+The buyer never hands money directly to the seller. The seller never ships on trust alone. The platform earns a fee for being the honest middleman.
+
+## The state machine is the product
+
+Escrow lives and dies by its states:
+
+```
+PENDING  →  FUNDED  →  DELIVERED  →  COMPLETED
+                       ↓
+                    DISPUTED → (REFUNDED | RELEASED)
+```
+
+Every transition is an event. Every event is idempotent. Every state is persisted — never derived by re-calculating balances.
+
+```java
+public enum EscrowStatus { PENDING, FUNDED, DELIVERED, DISPUTED, COMPLETED, REFUNDED }
+```
+
+The most dangerous transition is **release**. It fires payment to the seller — once. So:
+
+```java
+@Transactional
+public void completeTransaction(UUID txnId) {
+    Transaction txn = repo.findByIdForUpdate(txnId); // lock the row
+    if (txn.status == COMPLETED) return;             // idempotency guard
+    paymentProvider.credit(txn.sellerId, txn.amount);
+    txn.status = COMPLETED;
+}
+```
+
+## Time is a business rule
+
+Deadlines matter in escrow: auto-release after delivery confirmation, auto-refund after silent cancellation, escalation to human review when the parties can't agree. Run those as scheduled jobs with an audit trail, because "the system decided" is a sentence you must be able to back up.
+
+```sql
+-- nightly sweep: close stale holds
+UPDATE transactions
+SET status = 'COMPLETED'
+WHERE status = 'DELIVERED'
+  AND confirmed_at < NOW() - INTERVAL '7 days';
+```
+
+## Disputes are a product feature
+
+Great marketplaces design dispute flows like a feature, not a bug: evidence uploads, a neutral review window, split outcomes, refunds that don't destroy seller trust overnight. The engineering goal is a *system that can be wrong temporarily but is never wrong irreversibly*.
+
+That's the real craft of fintech: not the glamorous algorithm, but building rails you can trust with the thing people earned. Build the state machine first, the UX second, and the marketing last.

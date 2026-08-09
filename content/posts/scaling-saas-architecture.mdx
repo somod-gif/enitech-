@@ -1,0 +1,66 @@
+---
+title: "Scaling a SaaS from 0 to 10: the architecture that held up"
+excerpt: "Tenant scoping, Postgres as a moat, and the boring decisions that make a side project survive real users."
+date: 2026-05-02
+category: engineering
+tags: ["architecture", "postgresql", "multi-tenancy", "redis", "saas"]
+published: true
+---
+
+Every SaaS starts the same way: a single table and a wild dream. Then the second customer arrives, suddenly everyone has opinions about your data model, and the wild dream starts asking hard questions.
+
+Here is the architecture that held up when reality showed up.
+
+## Tenant-scope everything, from commit one
+
+The single most valuable decision in any multi-user product: **every table carries a tenant_id**. One database, shared schema, one rule — every query filters by tenant first.
+
+```sql
+CREATE TABLE orders (
+  id         UUID PRIMARY KEY,
+  tenant_id  UUID NOT NULL REFERENCES tenants(id),
+  ...
+);
+
+CREATE INDEX idx_orders_tenant ON orders (tenant_id, created_at DESC);
+```
+
+Why? Migrations look like regular app work instead of infrastructure theatre. Analytics queries stay cheap. And connecting a new tenant is a row insert, not a provisioning pipeline.
+
+"One database per client" sounds flexible until you have forty databases to patch at 2 a.m.
+
+## Postgres is a moat, not a compromise
+
+The first couple of years barely move the needle on a properly-indexed Postgres. JSONB for flexible documents, `tsvector` for search, window functions for dashboards, and `LISTEN/NOTIFY` when you want light realtime without adding infrastructure.
+
+Most "I need something stronger" moments are really "my queries are slow" moments — and the fix is usually an index, or a field being used in a `WHERE` without one.
+
+## Redis earns its rent as a cache
+
+Redis shows up for the reads your users hammer: session state, rate-limit counters, dashboard summaries, session flags. The pattern that works:
+
+```ts
+const summary = await cache.get(`dash:${tenantId}`);
+if (!summary) {
+  // compute once, style it for 60 seconds, let it be stale
+}
+```
+
+Never cache the source of truth. Cache the *derived* results, with short, honest TTLs, and invalidate eagerly after a write.
+
+## The first bottleneck is rarely the database
+
+Looking back, the production moments were almost always:
+
+1. **N+1 queries** — the "query in a loop" that survives a demo and dies in October.
+2. **Fat payloads** — serializing fields the UI never reads.
+3. **Re-renders** — client trees redrawing entire views because stable props weren't memoized.
+4. **Unoptimized assets** — multi-megabyte screenshots and fonts shipping on every page.
+
+Fix those before reaching for vertical scaling. Boring things, done precisely, carry 95% of the weight.
+
+## Ship boring, on purpose
+
+The most productive thing our team ever did was make the *boring* path the default: migrations reviewed before merge, backups tested monthly, deploys green or nothing. "Fast but fragile" is not a speed — it's a small loan default.
+
+That's the architecture. Not impressive, but it kept a product alive through 10x growth — and that's exactly what architecture is for.

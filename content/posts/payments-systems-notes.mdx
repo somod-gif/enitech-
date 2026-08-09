@@ -1,0 +1,74 @@
+---
+title: "What building a payment system taught me about software"
+excerpt: "Escrow, reconciliation, retries and the terrifying beauty of moving money. Lessons from building fintech systems in production."
+date: 2026-07-20
+category: fintech
+tags: [fintech, payments, spring-boot, engineering]
+published: true
+---
+
+There is a moment in every fintech project where you realize your code now handles **real money**. Not mock data, not test cards — actual naira moving between actual people. That moment changes how you write software forever.
+
+Here is what building payment systems taught me about engineering.
+
+## Money moves only once
+
+The single most important rule in payments: **idempotency first**. If a request times out, your server retries. If your first attempt actually succeeded, the customer gets charged twice.
+
+```java
+public record PaymentRequest(String reference, BigDecimal amount, String currency) {}
+```
+
+Every request must carry a unique reference from the client. The server checks the reference, and if it has already seen it, it returns the *original* result instead of processing a second time. The database constraint looks like this:
+
+```sql
+CREATE UNIQUE INDEX idx_payments_reference ON payments (reference);
+```
+
+That one line has saved me more production incidents than any code review I have ever done.
+
+## Numbers: trust nothing
+
+Never, ever do money math in floating point.
+
+```java
+// Wrong — floats round
+double amount = 0.1 + 0.2; // 0.30000000000000004
+
+// Right — integer minor units
+long amountInKobo = 1_000_00; // ₦1,000.00
+```
+
+Work in the *smallest* unit of currency (kobo, cents) as an integer. Serialize money with a decimal type. Render it formatted. This one practice kills an entire category of bugs that financial auditors would love.
+
+## The retry ladder
+
+Integrations to payment gateways fail. Networks fail. Your datacenter fails. A robust system has a **retry ladder**:
+
+1. immediate retry for network blips,
+2. short backoff for transient 5xxs,
+3. delayed queue for stuck transactions,
+4. a reconciliation job that catches everything else.
+
+The last step matters most:
+a periodic sweep that compares your ledger with the *provider's* ledger, flagging anything that diverges.
+
+```java
+@Service
+public class ReconService {
+    @Scheduled(cron = "0 */30 * * * *")
+    public void reconcile() {
+        // pull provider transactions, diff against local ledger
+    }
+}
+```
+
+## The delay
+
+The final lesson — communication itself rarely fails forever. Systems fail, **then recover**. So:
+
+- Keep a transaction *state machine* (PENDING → SUCCESS / FAILED / REFUNDED).
+- Never delete state you might need to explain to someone.
+- Write the outcome the moment it happens; read optimistically.
+
+Building payments infrastructure feels like operating a very precise machine where the operator never sleeps. It is hard, stressful and honestly — the most fun I've ever had as an engineer. If you want my unfiltered hot takes in your inbox, the [contact](/contact) page is two clicks away.
