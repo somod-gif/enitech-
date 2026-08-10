@@ -16,10 +16,13 @@ import { toast } from "sonner";
 import {
   Download,
   Eye,
+  Loader2,
   Plus,
   RotateCcw,
   Trash2,
 } from "lucide-react";
+import html2canvas from "html2canvas-pro";
+import { jsPDF } from "jspdf";
 import {
   createId,
   CV_STORAGE_KEY,
@@ -93,10 +96,6 @@ export function CVBuilder() {
             >
               <RotateCcw className="h-4 w-4" />
               Reset
-            </Button>
-            <Button onClick={() => window.print()}>
-              <Download className="h-4 w-4" />
-              Download PDF
             </Button>
           </div>
         </div>
@@ -473,17 +472,54 @@ type CvUnit = {
 };
 
 export function CvPreview({ data }: { data: CvData }) {
+  const [exportRequest, setExportRequest] = useState(0);
+  const [exporting, setExporting] = useState(false);
+
   return (
     <div id="cv-print-col" className="min-w-0">
-      <p
-        className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground"
+      <div
+        className="mb-3 flex flex-wrap items-center justify-between gap-3"
         data-print-hide
       >
-        <Eye className="h-3.5 w-3.5" />
-        Live preview · A4 paper · exact pagination — prints 1:1
-      </p>
-      <PaginatedCv data={data} />
+        <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+          <Eye className="h-3.5 w-3.5" />
+          Live preview · A4 paper · exact pagination
+        </p>
+        <DownloadPdfButton
+          exporting={exporting}
+          onExport={() => setExportRequest((request) => request + 1)}
+        />
+      </div>
+      <PaginatedCv
+        data={data}
+        exportRequest={exportRequest}
+        onExportChange={setExporting}
+      />
     </div>
+  );
+}
+
+function DownloadPdfButton({
+  exporting,
+  onExport,
+}: {
+  exporting: boolean;
+  onExport: () => void;
+}) {
+  return (
+    <Button size="sm" variant="gradient" disabled={exporting} onClick={onExport}>
+      {exporting ? (
+        <>
+          <Loader2 className="h-4 w-4 animate-spin" />
+          Preparing…
+        </>
+      ) : (
+        <>
+          <Download className="h-4 w-4" />
+          Download PDF
+        </>
+      )}
+    </Button>
   );
 }
 
@@ -690,9 +726,18 @@ function paginate(
   return { pages, overflow: false };
 }
 
-function PaginatedCv({ data }: { data: CvData }) {
+function PaginatedCv({
+  data,
+  exportRequest,
+  onExportChange,
+}: {
+  data: CvData;
+  exportRequest: number;
+  onExportChange: (exporting: boolean) => void;
+}) {
   const fitRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
+  const exportRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [pages, setPages] = useState<number[][] | null>(null);
   const [overflow, setOverflow] = useState(false);
   const [compact, setCompact] = useState(false);
@@ -728,6 +773,58 @@ function PaginatedCv({ data }: { data: CvData }) {
     });
     return () => window.cancelAnimationFrame(frame);
   }, [data, compact]);
+
+  useEffect(() => {
+    if (exportRequest === 0 || !pages) return;
+    let cancelled = false;
+    onExportChange(true);
+
+    const run = async () => {
+      try {
+        await new Promise((resolve) =>
+          window.requestAnimationFrame(() => window.requestAnimationFrame(resolve)),
+        );
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "px",
+          format: [A4_WIDTH, A4_HEIGHT],
+          compress: true,
+        });
+        pdf.setProperties({ title: `${data.name} — CV`, author: data.name });
+
+        for (let i = 0; i < pages.length; i++) {
+          const element = exportRefs.current[i];
+          if (!element || cancelled) return;
+          const canvas = await html2canvas(element, {
+            scale: 3,
+            backgroundColor: "#ffffff",
+            useCORS: true,
+            logging: false,
+          });
+          const image = canvas.toDataURL("image/png");
+          if (i > 0) pdf.addPage([A4_WIDTH, A4_HEIGHT], "portrait");
+          pdf.addImage(image, "PNG", 0, 0, A4_WIDTH, A4_HEIGHT);
+        }
+
+        const filename = `${data.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "cv"}-cv.pdf`;
+        pdf.save(filename);
+        if (!cancelled) {
+          toast.success("PDF downloaded — it matches the preview exactly.");
+        }
+      } catch {
+        if (!cancelled) {
+          toast.error("Could not generate the PDF — please try again.");
+        }
+      } finally {
+        if (!cancelled) onExportChange(false);
+      }
+    };
+
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [exportRequest, pages, data, onExportChange]);
 
   const width = Math.round(A4_WIDTH * scale);
   const pageCount = pages?.length ?? 0;
@@ -792,6 +889,23 @@ function PaginatedCv({ data }: { data: CvData }) {
         {units.map((unit) => (
           <div key={unit.key} data-unit-key={unit.key}>
             {unit.node}
+          </div>
+        ))}
+      </div>
+
+      <div className="cv-export" aria-hidden>
+        {pages?.map((pageUnits, pageIndex) => (
+          <div
+            key={`export-${pageIndex}`}
+            ref={(element) => {
+              exportRefs.current[pageIndex] = element;
+            }}
+            className={cn("cv-page", compact && "cv-compact")}
+            style={{ width: A4_WIDTH, height: A4_HEIGHT }}
+          >
+            {pageUnits.map((unitIndex) => (
+              <div key={units[unitIndex].key}>{units[unitIndex].node}</div>
+            ))}
           </div>
         ))}
       </div>
