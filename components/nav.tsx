@@ -63,7 +63,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="site-header fixed inset-x-0 top-0 z-50" data-print-hide>
       <div className="section-shell">
         <motion.nav
           initial={{ y: -24, opacity: 0 }}
