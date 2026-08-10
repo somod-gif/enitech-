@@ -23,7 +23,7 @@ const SOCIALS = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative border-t">
+    <footer className="site-footer relative border-t" data-print-hide>
       <div className="section-shell py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="space-y-5">

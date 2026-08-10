@@ -27,7 +27,7 @@ export function AnimatedBackground() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div aria-hidden data-print-hide className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-background" />
       {ORBS.map((orb, index) => (
         <motion.div
