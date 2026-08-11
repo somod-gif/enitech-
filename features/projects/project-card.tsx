@@ -70,27 +70,27 @@ export function ProjectCard({
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="font-display-sm text-lg font-semibold">
+          <div className="min-w-0">
+            <h3 className="truncate font-display-sm text-base font-semibold">
               {project.title}
             </h3>
-            <p className="mt-0.5 text-sm text-muted-foreground">
+            <p className="mt-0.5 truncate text-xs text-muted-foreground">
               {project.tagline}
             </p>
           </div>
-          <span className="font-mono text-xs text-muted-foreground">
+          <span className="shrink-0 font-mono text-xs text-muted-foreground">
             {project.year}
           </span>
         </div>
 
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
           {project.description}
         </p>
 
-        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Tech stack">
-          {project.stack.map((tech) => (
+        <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Tech stack">
+          {project.stack.slice(0, 6).map((tech) => (
             <li
               key={tech}
               className="rounded-md bg-secondary px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
@@ -100,7 +100,7 @@ export function ProjectCard({
           ))}
         </ul>
 
-<div className="mt-6 flex items-center gap-4 border-t pt-4">
+        <div className="mt-4 flex items-center gap-4 border-t pt-3">
           {project.live?.startsWith("http") ? (
             <Link
               href={project.live}
