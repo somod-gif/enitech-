@@ -1,4 +1,4 @@
-import { Banknote, Cloud, Database, Layout, Megaphone, Server } from "lucide-react";
+import { Banknote, Cloud, Database, FlaskConical, Layout, Megaphone, MessageSquare, Server } from "lucide-react";
 import { SKILL_GROUPS } from "@/lib/profile";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
@@ -11,6 +11,8 @@ const ICONS = {
   cloud: Cloud,
   megaphone: Megaphone,
   banknote: Banknote,
+  message: MessageSquare,
+  flask: FlaskConical,
 } as const;
 
 export function Skills() {
