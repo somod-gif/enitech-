@@ -19,7 +19,7 @@ function NavLinks({
   onNavigate?: () => void;
 }) {
   return (
-    <div className="ml-auto hidden items-center gap-1 md:flex">
+    <div className="hidden items-center gap-1 md:flex">
       {NAV_LINKS.slice(0, -1).map((link) => {
         const active =
           link.href === "/"
@@ -40,7 +40,7 @@ function NavLinks({
             {active && (
               <motion.span
                 layoutId="nav-pill"
-                className="absolute inset-0 -z-10 rounded-full bg-accent"
+                className="absolute inset-0 -z-10 rounded-full bg-muted"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
@@ -70,7 +70,7 @@ export function Nav() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           className={cn(
-            "mt-4 flex items-center rounded-full border px-3 py-2 transition-all duration-300",
+            "mt-4 flex items-center justify-between rounded-full border px-3 py-2 transition-all duration-300",
             "glass-strong border-border/60 shadow-lg shadow-black/[0.03] dark:shadow-black/20",
           )}
           aria-label="Primary navigation"
@@ -84,7 +84,7 @@ export function Nav() {
               E
             </span>
             <span className="hidden font-mono text-sm font-medium tracking-tight sm:block">
-              Enitech
+              eniola.dev
             </span>
           </Link>
 
@@ -116,8 +116,8 @@ export function Nav() {
                         className={cn(
                           "flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-medium transition-colors",
                           active
-                            ? "bg-accent text-foreground"
-                            : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
+                            ? "bg-muted text-foreground"
+                            : "text-muted-foreground hover:bg-muted/60 hover:text-foreground",
                         )}
                       >
                         <span className="flex items-center gap-4">

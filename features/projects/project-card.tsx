@@ -8,14 +8,14 @@ const STATUS_META: Record<
   Project["status"],
   { label: string; className: string }
 > = {
-  live: { label: "Live", className: "text-foreground" },
+  live: { label: "Live", className: "text-emerald" },
   "in-progress": {
     label: "In progress",
     className: "text-muted-foreground",
   },
   "open-source": {
     label: "Open source",
-    className: "text-foreground/80",
+    className: "text-muted-foreground",
   },
   archived: {
     label: "Archived",
@@ -34,7 +34,7 @@ export function ProjectCard({
 
   return (
     <article
-      className="card-hover group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
       style={{ transitionDelay: `${index * 30}ms` }}
     >
       <Link
@@ -49,15 +49,11 @@ export function ProjectCard({
           alt={`${project.title} screenshot`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover grayscale transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          className="object-cover grayscale transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
         {project.featured && (
           <span className="absolute left-3 top-3 rounded-full bg-foreground px-2.5 py-1 text-[11px] font-semibold text-background">
-            ★ Featured
+            Featured
           </span>
         )}
         <span
@@ -73,7 +69,7 @@ export function ProjectCard({
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h3 className="truncate font-display-sm text-base font-semibold">
+            <h3 className="truncate text-base font-semibold">
               {project.title}
             </h3>
             <p className="mt-0.5 truncate text-xs text-muted-foreground">
@@ -93,7 +89,7 @@ export function ProjectCard({
           {project.stack.slice(0, 6).map((tech) => (
             <li
               key={tech}
-              className="rounded-md bg-secondary px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+              className="rounded-full bg-muted px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground"
             >
               {tech}
             </li>
@@ -106,7 +102,7 @@ export function ProjectCard({
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-opacity hover:opacity-80"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-opacity hover:opacity-80"
             >
               <ExternalLink className="h-3.5 w-3.5" />
               Live Demo

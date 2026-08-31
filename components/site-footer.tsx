@@ -36,7 +36,7 @@ export function SiteFooter() {
                 E
               </span>
               <span className="font-mono text-base font-medium">
-                eniola<span className="text-primary">.dev</span>
+                eniola<span className="text-muted-foreground">.dev</span>
               </span>
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
@@ -48,8 +48,8 @@ export function SiteFooter() {
             </p>
             <p className="flex items-center gap-2 text-sm">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-foreground" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald" />
               </span>
               <span className="text-foreground">
                 Available for work

@@ -16,7 +16,7 @@ export function ScrollProgress() {
   return (
     <motion.div
       aria-hidden
-      className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-foreground"
+      className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-foreground/60"
       data-print-hide
       style={{ scaleX }}
     />

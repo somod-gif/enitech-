@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "generate-cv-pdf": "node scripts/generate-cv-pdf.mjs"
+    "generate-cv-pdf": "node scripts/generate-cv-pdf.mjs",
+    "generate-cv-specialized": "node scripts/generate-cv-specialized.mjs",
+    "generate-cover-letter-undp": "node scripts/generate-cover-letter-undp.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

@@ -47,6 +47,7 @@ export const SKILL_GROUPS: SkillCategory[] = [
       "Java",
       "Spring Boot",
       "Spring",
+      "Python",
       "GraphQL",
       "REST APIs",
       "gRPC",
@@ -79,6 +80,8 @@ export const SKILL_GROUPS: SkillCategory[] = [
       "Vercel",
       "Firebase",
       "Supabase",
+      "Linux",
+      "Bash",
     ],
   },
   {
@@ -86,7 +89,7 @@ export const SKILL_GROUPS: SkillCategory[] = [
     label: "Message Queues",
     description: "Event-driven plumbing between services.",
     icon: "message",
-    skills: ["RabbitMQ", "Google Pub/Sub"],
+    skills: ["RabbitMQ", "Google Pub/Sub", "Apache Kafka"],
   },
   {
     id: "testing",
@@ -192,6 +195,46 @@ export const EXPERIENCE: Experience[] = [
 ];
 
 export const PROJECTS: Project[] = [
+  {
+    slug: "ledgerflow",
+    title: "LedgerFlow",
+    tagline: "Digital financial platform with double-entry accounting",
+    description:
+      "A full-stack digital financial platform that lets users create accounts, send money, and track every transaction in real time. Uses double-entry accounting — the same system banks rely on — to ensure every penny is accounted for with a complete audit trail. Built with Spring Boot 4.1.0 (Java 21), Next.js 16, and Expo SDK 54 across backend, web, and mobile.",
+    image: "/projects/ledgerflow.svg",
+    stack: [
+      "Java 21",
+      "Spring Boot",
+      "PostgreSQL",
+      "Redis",
+      "Next.js",
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Docker",
+      "Flyway",
+      "Spring Security",
+      "JWT",
+      "Prometheus",
+    ],
+    github: "https://github.com/somod-gif/FinTech_Project",
+    live: "#",
+    status: "live",
+    featured: true,
+    year: "2026",
+    highlights: [
+      "Double-entry accounting engine with DEBIT/CREDIT invariant checks",
+      "22 REST endpoints across 10 Java modules (70 source files)",
+      "Idempotency keys preventing duplicate transfers",
+      "Optimistic locking (@Version) preventing race conditions",
+      "Event-driven architecture with @EventListener + @Async",
+      "Rate limiting with Bucket4j (10-100 req/min per endpoint)",
+      "Full audit trail with IP logging for compliance",
+      "158 total files across backend, web, and mobile",
+      "Real-time notifications and balance reconciliation",
+      "Docker multi-stage build + docker-compose deployment",
+    ],
+  },
   {
     slug: "carticom",
     title: "Carticom",
