@@ -48,3 +48,6 @@ next-env.d.ts
 /*.txt
 /cover-letter-*.md
 /application-*.md
+
+# resume placeholder stays local only
+/public/resume.pdf
