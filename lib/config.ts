@@ -9,7 +9,7 @@ export const SITE = {
     "Software engineer building scalable fintech systems, AI-powered products, developer tools, and modern SaaS applications. Available for internships, freelance work, startup collaborations, and junior software engineering roles.",
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "http://localhost:3000",
+    "https://enitech.vercel.app",
   email: "eniolabadmus351@gmail.com",
   location: "Nigeria",
   availability:

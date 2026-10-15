@@ -43,7 +43,7 @@ All optional except `NEXT_PUBLIC_SITE_URL` at build time. The site runs fully wi
 
 | Variable                          | Used for                                   | Required |
 | --------------------------------- | ------------------------------------------ | -------- |
-| `NEXT_PUBLIC_SITE_URL`            | Canonical URLs, sitemap, RSS               | No (defaults to `http://localhost:3000`) |
+| `NEXT_PUBLIC_SITE_URL`            | Canonical URLs, sitemap, RSS               | No (defaults to `https://enitech.vercel.app`) |
 | `GITHUB_TOKEN`                    | `/insights` — GitHub GraphQL (read-only)   | No       |
 | `RESEND_API_KEY`                  | Contact form (server-side, via `/api/contact`) | No   |
 | `CONTACT_FROM_EMAIL`              | Contact form sender address                | No (defaults to `onboarding@resend.dev`) |
