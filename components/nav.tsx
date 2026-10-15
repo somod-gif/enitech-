@@ -19,7 +19,7 @@ function NavLinks({
   onNavigate?: () => void;
 }) {
   return (
-    <div className="hidden items-center gap-1 md:flex">
+    <div className="hidden items-center gap-1 lg:flex">
       {NAV_LINKS.slice(0, -1).map((link) => {
         const active =
           link.href === "/"

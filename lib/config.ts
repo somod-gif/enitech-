@@ -48,6 +48,8 @@ export const SUPABASE = {
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/demos", label: "Demos" },
   { href: "/projects", label: "Work" },
   { href: "/insights", label: "Insights" },
   { href: "/community", label: "Community" },

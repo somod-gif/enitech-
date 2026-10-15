@@ -88,11 +88,16 @@ export default function HomePage() {
                 Available for roles, freelance &amp; collaborations
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground">
-                Open to junior software engineering positions, internships, and startup collaborations.
+                Open to junior software engineering positions, internships, and
+                startup collaborations — and building websites, booking systems,
+                and call-management systems for businesses.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Button asChild size="lg" variant="gradient">
                   <Link href="/contact">Get in Touch</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/services">Services &amp; Pricing</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
                   <Link href="/projects">See My Work</Link>

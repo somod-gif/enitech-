@@ -1,12 +1,14 @@
 # Enitech — Badmus Samad Eniola · Portfolio
 
-Production-ready personal portfolio and blog for a software engineer — fintech, SaaS and developer-tooling focus. Built with Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS v4, Framer Motion and shadcn/ui-style components.
+Production-ready personal portfolio, blog, and services site for a software engineer — fintech, SaaS and developer-tooling focus, plus website, booking-system and call-management packages for businesses. Built with Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS v4, Framer Motion and shadcn/ui-style components.
 
 ## Pages
 
 | Route           | What's there                                                        |
 | --------------- | ------------------------------------------------------------------- |
 | `/`             | Hero, skills, experience, featured projects, latest posts, CTA      |
+| `/services`     | Service packages & fixed pricing — websites, booking systems, call-management systems from ₦50,000 |
+| `/demos`        | Industry demo gallery — salons, clinics, gyms, hotels, real estate & more |
 | `/projects`     | All projects, featured + rest, tags, GitHub link                    |
 | `/insights`     | GitHub contributions graph (via GraphQL, graceful fallback), stats  |
 | `/community`    | Open-source work, speaking, mentoring, campus leadership             |
