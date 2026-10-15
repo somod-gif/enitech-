@@ -24,9 +24,9 @@ export default function NotFoundPage() {
             </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href="/projects">
+            <Link href="/services">
               <Compass className="h-4 w-4" />
-              Browse projects
+              See services
             </Link>
           </Button>
         </div>

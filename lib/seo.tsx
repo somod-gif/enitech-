@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/config";
 import { absoluteUrl } from "@/lib/utils";
-import type { PostMeta } from "@/types";
 
 export function jsonLd(data: Record<string, unknown>) {
   return (
@@ -12,53 +11,20 @@ export function jsonLd(data: Record<string, unknown>) {
   );
 }
 
-export function personJsonLd() {
+export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: SITE.author,
-    jobTitle: "Software Engineer",
+    "@type": "Organization",
+    name: SITE.name,
     url: SITE.url,
     email: `mailto:${SITE.email}`,
+    description: SITE.description,
     address: {
       "@type": "PostalAddress",
       addressCountry: "NG",
     },
-    sameAs: [
-      SITE.githubUrl,
-      SITE.linkedinUrl,
-      SITE.twitterUrl,
-    ],
-    knowsAbout: [
-      "Fintech",
-      "Full Stack Engineering",
-      "Payments",
-      "SaaS",
-      "AI Applications",
-      "Microservices",
-    ],
-  };
-}
-
-export function articleJsonLd(meta: PostMeta, slug: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: meta.title,
-    description: meta.excerpt,
-    datePublished: meta.date,
-    dateModified: meta.date,
-    url: absoluteUrl(`/blog/${slug}`),
-    author: {
-      "@type": "Person",
-      name: SITE.author,
-      url: SITE.url,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE.name ?? SITE.author,
-    },
-    keywords: meta.tags.join(", "),
+    areaServed: "Worldwide",
+    sameAs: [SITE.githubUrl, SITE.linkedinUrl, SITE.twitterUrl],
   };
 }
 
@@ -83,17 +49,17 @@ export function buildMetadata({
   const ogImage = image ?? `${SITE.url}/opengraph-image`;
 
   return {
-    title: title ? `${title} — ${SITE.author}` : SITE.title,
+    title: title ? `${title} — ${SITE.name}` : SITE.title,
     description: description ?? SITE.description,
     alternates: { canonical: url },
     openGraph: {
-      title: title ?? `${SITE.author} — ${SITE.role}`,
+      title: title ?? `${SITE.name} — ${SITE.role}`,
       description: description ?? SITE.description,
       url,
       siteName: SITE.name,
       type,
       locale: "en_NG",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: SITE.author }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: SITE.name }],
       ...(publishedTime ? { publishedTime } : {}),
     },
     twitter: {

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { SITE } from "@/lib/config";
 
-export const alt = `${SITE.author} — ${SITE.role}`;
+export const alt = `${SITE.name} — ${SITE.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -45,10 +45,10 @@ export default function OpengraphImage() {
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontSize: 22, color: "#e4e4e7", fontWeight: 600 }}>
-              eniola.dev
+              enitech
             </span>
             <span style={{ fontSize: 14, color: "#71717a" }}>
-              Software Engineer · Nigeria
+              Websites · Booking · Call management
             </span>
           </div>
         </div>
@@ -62,11 +62,11 @@ export default function OpengraphImage() {
               letterSpacing: "-0.04em",
             }}
           >
-            {SITE.author}
+            Your business, online
           </span>
           <span style={{ fontSize: 26, color: "#a1a1aa", lineHeight: 1.4 }}>
-            Building scalable fintech systems, AI-powered products and modern
-            SaaS applications.
+            Websites, booking systems and call management — live in days, from
+            NGN 50,000.
           </span>
         </div>
 
@@ -87,7 +87,7 @@ export default function OpengraphImage() {
               background: "#fafafa",
             }}
           />
-          Available for internships, freelance & startup collaborations
+          Fixed pricing from NGN 50,000 · 50% deposit to start
         </div>
 
         <div

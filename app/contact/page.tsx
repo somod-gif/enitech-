@@ -11,7 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Contact",
   description:
-    "Get in touch with Badmus Samad Eniola for internships, freelance work, startup collaborations and junior software engineering roles.",
+    "Get in touch with Enitech about a website, booking system or call-management project. Free quotes — replies within 24 hours.",
   path: "/contact",
 });
 
@@ -52,8 +52,8 @@ export default function ContactPage() {
           <div>
             <SectionHeading
               eyebrow="Contact"
-              title="Let's build something"
-              description="Internships, freelance, startup collaboration or a project idea — my inbox is open."
+              title="Tell us about your project"
+              description="A website, bookings on autopilot, or never missing a customer call — send a message or book a free 15-minute call."
             />
             <Reveal delay={0.15}>
               <div className="mt-10 space-y-4">

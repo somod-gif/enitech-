@@ -8,7 +8,6 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Rss,
   Twitter,
 } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/config";
@@ -18,7 +17,6 @@ const SOCIALS = [
   { label: "LinkedIn", href: SITE.linkedinUrl, icon: Linkedin },
   { label: "X / Twitter", href: SITE.twitterUrl, icon: Twitter },
   { label: "Email", href: `mailto:${SITE.email}`, icon: Mail },
-  { label: "RSS", href: "/feed.xml", icon: Rss },
 ];
 
 export function SiteFooter() {
@@ -30,17 +28,18 @@ export function SiteFooter() {
             <Link
               href="/"
               className="inline-flex items-center gap-2.5"
-              aria-label="Eniola.dev — home"
+              aria-label="Enitech — home"
             >
               <span className="grid h-9 w-9 place-items-center rounded-full bg-foreground text-xs font-bold text-background">
                 E
               </span>
               <span className="font-mono text-base font-medium">
-                eniola<span className="text-muted-foreground">.dev</span>
+                enitech
               </span>
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              {SITE.role} building {SITE.subtitle.toLowerCase()}
+              Websites, booking systems and call management for businesses in
+              Nigeria and worldwide.
             </p>
             <p className="flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4" />
@@ -52,7 +51,7 @@ export function SiteFooter() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald" />
               </span>
               <span className="text-foreground">
-                Available for work
+                Taking on new clients
               </span>
             </p>
           </div>

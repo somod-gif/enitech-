@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { AnimatedBackground } from "@/components/background";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { Toaster } from "@/components/ui/sonner";
-import { jsonLd, personJsonLd } from "@/lib/seo";
+import { jsonLd, organizationJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/config";
 
 const inter = Inter({
@@ -79,9 +79,6 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   alternates: {
     canonical: "/",
-    types: {
-      "application/rss+xml": "/feed.xml",
-    },
   },
 };
 
@@ -120,7 +117,7 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <SiteFooter />
           <Toaster position="bottom-right" />
-          {jsonLd(personJsonLd())}
+          {jsonLd(organizationJsonLd())}
         </ThemeProvider>
       </body>
     </html>

@@ -78,13 +78,13 @@ export function Nav() {
           <Link
             href="/"
             className="flex items-center gap-2.5 rounded-full px-2 py-1"
-            aria-label="Eniola.dev — home"
+            aria-label="Enitech — home"
           >
             <span className="grid h-8 w-8 place-items-center rounded-full bg-foreground text-xs font-bold text-background">
               E
             </span>
             <span className="hidden font-mono text-sm font-medium tracking-tight sm:block">
-              eniola.dev
+              enitech
             </span>
           </Link>
 
