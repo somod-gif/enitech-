@@ -10,7 +10,7 @@ const ORBS = [
     duration: 18,
   },
   {
-    className: "h-[26rem] w-[26rem] bg-emerald/5 blur-[120px]",
+    className: "h-[26rem] w-[26rem] bg-brand/5 blur-[120px]",
     initial: { x: "70%", y: "30%" },
     animate: { x: ["70%", "74%", "70%"], y: ["30%", "26%", "30%"] },
     duration: 22,

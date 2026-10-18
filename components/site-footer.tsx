@@ -30,16 +30,17 @@ export function SiteFooter() {
               className="inline-flex items-center gap-2.5"
               aria-label="Enitech — home"
             >
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-foreground text-xs font-bold text-background">
+              <span className="grid h-9 w-9 place-items-center rounded-md bg-brand-solid text-sm font-extrabold tracking-tighter text-black">
                 E
               </span>
-              <span className="font-mono text-base font-medium">
-                enitech
+              <span className="font-mono text-sm font-bold uppercase tracking-widest">
+                Enitech
               </span>
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Websites, booking systems and call management for businesses in
-              Nigeria and worldwide.
+              Engineering studio building business software, websites,
+              e-commerce stores and AI automations — for clients in Nigeria and
+              worldwide.
             </p>
             <p className="flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4" />
@@ -47,8 +48,8 @@ export function SiteFooter() {
             </p>
             <p className="flex items-center gap-2 text-sm">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
               </span>
               <span className="text-foreground">
                 Taking on new clients
@@ -104,8 +105,8 @@ export function SiteFooter() {
           className="mt-16 flex flex-col gap-4 border-t pt-8 sm:flex-row sm:items-center sm:justify-between"
         >
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} {SITE.author}. Built with Next.js,
-            Tailwind and a lot of caffeine.
+            © {new Date().getFullYear()} {SITE.author} — Engineering Studio.
+            All rights reserved.
           </p>
           <Link
             href={SITE.githubUrl}

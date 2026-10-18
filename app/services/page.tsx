@@ -151,12 +151,12 @@ export default function ServicesPage() {
                 className={cn(
                   "relative flex h-full flex-col rounded-2xl border bg-card p-6 sm:p-8",
                   tier.highlighted
-                    ? "border-emerald/50 shadow-xl shadow-emerald/10 ring-1 ring-emerald/30"
+                    ? "border-brand/50 shadow-xl shadow-brand/10 ring-1 ring-brand/30"
                     : "shadow-sm",
                 )}
               >
                 {tier.highlighted ? (
-                  <span className="absolute -top-3 left-6 rounded-full bg-emerald px-3 py-1 text-xs font-semibold text-background">
+                  <span className="absolute -top-3 left-6 rounded-full bg-brand px-3 py-1 text-xs font-semibold text-background">
                     Most popular
                   </span>
                 ) : null}
@@ -179,7 +179,7 @@ export default function ServicesPage() {
                 <ul className="mt-6 flex-1 space-y-3">
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2.5 text-sm">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald" />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -231,12 +231,12 @@ export default function ServicesPage() {
             {ADDONS.map((addon, index) => (
               <Reveal key={addon.title} delay={index * 0.08}>
                 <div className="card-hover h-full rounded-2xl border bg-card p-6 shadow-sm">
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald/10 text-emerald">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
                     <addon.icon className="h-5 w-5" />
                   </span>
                   <div className="mt-4 flex items-baseline justify-between gap-2">
                     <p className="font-display-sm font-semibold">{addon.title}</p>
-                    <p className="whitespace-nowrap font-mono text-xs text-emerald">
+                    <p className="whitespace-nowrap font-mono text-xs text-brand">
                       {addon.price}
                     </p>
                   </div>
@@ -260,7 +260,7 @@ export default function ServicesPage() {
               <Reveal key={item.step} delay={index * 0.08}>
                 <div className="h-full rounded-2xl border bg-muted/30 p-6">
                   <div className="flex items-center justify-between">
-                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald/10 text-emerald">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
                       <item.icon className="h-5 w-5" />
                     </span>
                     <span className="font-mono text-xs text-muted-foreground">
@@ -280,7 +280,7 @@ export default function ServicesPage() {
         {/* CTA */}
         <Reveal>
           <div className="mt-24 rounded-2xl border bg-card px-6 py-16 text-center shadow-sm sm:px-16">
-            <p className="font-mono text-xs uppercase tracking-widest text-emerald">
+            <p className="font-mono text-xs uppercase tracking-widest text-brand">
               Ready when you are
             </p>
             <h2 className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">

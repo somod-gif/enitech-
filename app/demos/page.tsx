@@ -128,7 +128,7 @@ export default function DemosPage() {
             <Reveal key={demo.name} delay={(index % 3) * 0.06}>
               <div className="card-hover glass flex h-full flex-col rounded-2xl border p-6">
                 <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald/10 text-emerald">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
                     <demo.icon className="h-5 w-5" />
                   </span>
                   <p className="font-display-sm font-semibold">{demo.name}</p>
@@ -149,7 +149,7 @@ export default function DemosPage() {
                   </div>
                   <Link
                     href="/contact"
-                    className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-emerald transition-colors hover:text-foreground"
+                    className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-brand transition-colors hover:text-foreground"
                   >
                     Request demo
                     <ArrowUpRight className="h-3.5 w-3.5" />

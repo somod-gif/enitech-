@@ -1,12 +1,12 @@
 export const SITE = {
   name: "Enitech",
   author: "Enitech",
-  title: "Enitech — Websites, Booking & Call Management Systems",
-  role: "Web & Smart Systems Studio",
+  title: "ENITECH — Engineering Studio & Business Software Solutions",
+  role: "Engineering Studio",
   subtitle:
-    "Websites, online booking systems, and call & lead management for small businesses — live in days, not months.",
+    "Custom business software, inventory systems, e-commerce stores, AI automations and web applications — for businesses, founders and agencies.",
   description:
-    "Enitech builds fast, modern websites, booking systems, and call-management systems for businesses in Nigeria and worldwide. Fixed pricing from ₦50,000. 50% deposit to start.",
+    "ENITECH is a full-stack engineering studio building business management software, inventory and sales systems, e-commerce stores, AI automations and mobile apps for businesses in Nigeria and worldwide. Projects from ₦50,000.",
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
     "https://enitech.vercel.app",
@@ -20,13 +20,16 @@ export const SITE = {
   twitterHandle: "@BadmusEniola07",
   keywords: [
     "Enitech",
-    "Web design Nigeria",
-    "Business websites",
-    "Booking system",
-    "Appointment scheduling software",
-    "Call management system",
-    "Lead management CRM",
+    "Software engineering studio Nigeria",
+    "Custom business software",
+    "Business website Nigeria",
+    "E-commerce development",
+    "Inventory management system",
+    "AI automation",
     "WhatsApp automation",
+    "Agency white-label development",
+    "Mobile app development",
+    "School management platform",
   ],
 } as const;
 

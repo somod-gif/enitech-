@@ -5,55 +5,59 @@
 
 :root {
   --background: 0 0% 98%;
-  --foreground: 0 0% 10%;
+  --foreground: 210 25% 8%;
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 10%;
+  --card-foreground: 210 25% 8%;
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 10%;
-  --primary: 220 14% 46%;
+  --popover-foreground: 210 25% 8%;
+  --primary: 72 100% 28%;
   --primary-foreground: 0 0% 100%;
   --secondary: 0 0% 94%;
-  --secondary-foreground: 0 0% 10%;
-  --muted: 0 0% 92%;
-  --muted-foreground: 0 0% 40%;
+  --secondary-foreground: 210 25% 8%;
+  --muted: 0 0% 94%;
+  --muted-foreground: 0 0% 38%;
   --accent: 0 0% 92%;
-  --accent-foreground: 0 0% 10%;
+  --accent-foreground: 210 25% 8%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 100%;
-  --border: 0 0% 90%;
-  --input: 0 0% 90%;
-  --ring: 220 14% 46%;
-  --radius: 0.3rem;
+  --border: 0 0% 88%;
+  --input: 0 0% 88%;
+  --ring: 72 100% 28%;
+  --radius: 0.5rem;
   --grid-line: rgba(0, 0, 0, 0.05);
-  --emerald: 160 84% 39%;
-  --emerald-light: 160 84% 95%;
-  --emerald-glow: 160 84% 39%;
+  /* Brand: lime on charcoal (dark #ccff00 · light darkened for contrast) */
+  --brand: 72 100% 32%;
+  --brand-dark: 72 100% 26%;
+  --brand-glow: 72 100% 40%;
+  /* Theme-independent lime for buttons/tiles (always #ccff00 + black text) */
+  --brand-solid: 72 100% 50%;
+  --brand-solid-dark: 72 100% 42%;
 }
 
 .dark {
-  --background: 0 0% 10%;
-  --foreground: 0 0% 98%;
-  --card: 0 0% 13%;
-  --card-foreground: 0 0% 98%;
-  --popover: 0 0% 13%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 220 14% 60%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 18%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 0 0% 18%;
-  --muted-foreground: 0 0% 65%;
-  --accent: 0 0% 18%;
-  --accent-foreground: 0 0% 98%;
+  --background: 210 16% 4%;
+  --foreground: 210 14% 96%;
+  --card: 220 17% 6%;
+  --card-foreground: 210 14% 96%;
+  --popover: 220 17% 6%;
+  --popover-foreground: 210 14% 96%;
+  --primary: 72 100% 50%;
+  --primary-foreground: 210 20% 6%;
+  --secondary: 220 14% 12%;
+  --secondary-foreground: 210 14% 96%;
+  --muted: 220 14% 12%;
+  --muted-foreground: 220 9% 60%;
+  --accent: 220 14% 13%;
+  --accent-foreground: 210 14% 96%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 18%;
-  --input: 0 0% 18%;
-  --ring: 220 14% 60%;
-  --grid-line: rgba(255, 255, 255, 0.06);
-  --emerald: 160 84% 45%;
-  --emerald-light: 160 40% 18%;
-  --emerald-glow: 160 84% 50%;
+  --border: 220 15% 15%;
+  --input: 220 15% 15%;
+  --ring: 72 100% 50%;
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --brand: 72 100% 50%;
+  --brand-dark: 72 100% 42%;
+  --brand-glow: 72 100% 50%;
 }
 
 @theme inline {
@@ -76,20 +80,21 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  --color-emerald: hsl(var(--emerald));
-  --color-emerald-light: hsl(var(--emerald-light));
-  --color-emerald-glow: hsl(var(--emerald-glow));
+  --color-brand: hsl(var(--brand));
+  --color-brand-dark: hsl(var(--brand-dark));
+  --color-brand-glow: hsl(var(--brand-glow));
+  --color-brand-solid: hsl(var(--brand-solid));
+  --color-brand-solid-dark: hsl(var(--brand-solid-dark));
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
     Consolas, monospace;
-  --font-serif: var(--font-display), ui-serif, Georgia, serif;
 
   --animate-marquee: marquee 32s linear infinite;
   --animate-glow-pulse: glow-pulse 9s ease-in-out infinite;
@@ -155,11 +160,11 @@ body {
 }
 
 ::selection {
-  background: hsl(var(--emerald) / 0.22);
+  background: hsl(var(--brand) / 0.3);
 }
 
 :focus-visible {
-  outline: 2px solid hsl(var(--emerald));
+  outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
 }
 
@@ -194,11 +199,11 @@ body {
   color: transparent;
 }
 
-.text-gradient-emerald {
+.text-gradient-brand {
   background-image: linear-gradient(
     115deg,
-    hsl(var(--emerald)),
-    hsl(160 60% 50%)
+    hsl(var(--brand)),
+    hsl(72 100% 60%)
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -248,6 +253,13 @@ body {
     black 30%,
     transparent 72%
   );
+}
+
+.grid-surface {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
 .card-hover {

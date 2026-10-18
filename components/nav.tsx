@@ -48,9 +48,14 @@ function NavLinks({
           </Link>
         );
       })}
-      <Button asChild size="sm" variant="gradient" className="ml-2 h-9 rounded-full">
+      <Button
+        asChild
+        size="sm"
+        variant="gradient"
+        className="ml-2 h-9 rounded-full"
+      >
         <Link href="/contact" onClick={onNavigate}>
-          Get in touch
+          Start a project
           <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </Button>
@@ -70,21 +75,21 @@ export function Nav() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           className={cn(
-            "mt-4 flex items-center justify-between rounded-full border px-3 py-2 transition-all duration-300",
+            "mt-4 flex items-center justify-between rounded-2xl border px-3 py-2 transition-all duration-300",
             "glass-strong border-border/60 shadow-lg shadow-black/[0.03] dark:shadow-black/20",
           )}
           aria-label="Primary navigation"
         >
           <Link
             href="/"
-            className="flex items-center gap-2.5 rounded-full px-2 py-1"
-            aria-label="Enitech — home"
+            className="flex items-center gap-2.5 rounded-lg px-2 py-1"
+            aria-label="ENITECH — home"
           >
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-foreground text-xs font-bold text-background">
+            <span className="grid h-8 w-8 place-items-center rounded-md bg-brand-solid text-sm font-extrabold tracking-tighter text-black">
               E
             </span>
-            <span className="hidden font-mono text-sm font-medium tracking-tight sm:block">
-              enitech
+            <span className="hidden font-mono text-sm font-bold uppercase tracking-widest sm:block">
+              Enitech
             </span>
           </Link>
 
@@ -142,7 +147,7 @@ export function Nav() {
                   </p>
                   <Button asChild variant="gradient" className="w-full">
                     <Link href="/contact" onClick={() => setOpen(false)}>
-                      Get in touch
+                      Start a project
                     </Link>
                   </Button>
                 </div>

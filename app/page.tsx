@@ -1,253 +1,379 @@
 import Link from "next/link";
 import {
-  ArrowUpRight,
-  CalendarCheck,
+  ArrowRight,
+  BarChart3,
+  Bot,
+  Boxes,
+  Building2,
   Check,
+  Clock3,
+  Code2,
+  CreditCard,
+  ExternalLink,
   Globe,
-  PhoneCall,
+  Layers,
+  Linkedin,
+  Github,
+  Mail,
+  MessageSquareText,
+  Phone,
+  ShoppingCart,
+  Smartphone,
+  Sparkles,
+  Wrench,
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/section-heading";
+import { HeroConsole } from "@/components/home/hero-console";
+import { WorkGrid } from "@/components/home/work-grid";
+import { InquiryForm } from "@/components/home/inquiry-form";
+import { CopyEmail } from "@/components/home/copy-email";
 import { buildMetadata } from "@/lib/seo";
+import { SITE } from "@/lib/config";
 
 export const metadata = buildMetadata({ path: "/" });
 
-const OFFERS = [
-  {
-    icon: Globe,
-    name: "Business website",
-    price: "from ₦50,000",
-    timeline: "Live in 5 days",
-    description:
-      "A fast, modern site that makes your business look professional on every screen — contact form, WhatsApp chat, maps and all.",
-    features: ["Up to 5 pages", "Mobile-first", "SEO setup"],
-    href: "/services",
-    highlighted: false,
-  },
-  {
-    icon: CalendarCheck,
-    name: "Booking system",
-    price: "from ₦75,000",
-    timeline: "Live in 10 days",
-    description:
-      "Your website books appointments, takes deposits and sends reminders automatically — while you focus on the work.",
-    features: ["Online scheduling", "Reminders", "Payments"],
-    href: "/services",
-    highlighted: true,
-  },
-  {
-    icon: PhoneCall,
-    name: "Call & lead management",
-    price: "from ₦100,000",
-    timeline: "Live in 14 days",
-    description:
-      "Never lose a customer to a missed call. Every call, form and WhatsApp message lands in one inbox with automatic follow-up.",
-    features: ["Missed-call capture", "Follow-up automation", "Lead dashboard"],
-    href: "/services",
-    highlighted: false,
-  },
+const HERO_PILLS = [
+  { label: "Professional websites", highlighted: false },
+  { label: "Inventory & sales OS", highlighted: false },
+  { label: "E-commerce stores", highlighted: false },
+  { label: "AI & WhatsApp automation", highlighted: true },
 ] as const;
 
-const INDUSTRIES = [
-  "Salons & Spas",
-  "Clinics",
-  "Gyms",
-  "Restaurants",
-  "Hotels & Shortlets",
-  "Real Estate",
-  "Schools",
-  "Events",
-  "Auto Shops",
-  "Fashion",
-  "Logistics",
-  "Consultants",
+const TRUST_ITEMS = [
+  "Projects from ₦50,000",
+  "First delivery in days",
+  "50% deposit to start",
+  "You own everything",
+] as const;
+
+const SERVICES = [
+  {
+    icon: Globe,
+    title: "Professional websites & landing pages",
+    description:
+      "High-converting, performance-focused company websites engineered to establish authority, present your offering clearly, and turn visitors into qualified leads.",
+    tag: "Speed & conversion optimisation",
+  },
+  {
+    icon: ShoppingCart,
+    title: "E-commerce websites & stores",
+    description:
+      "Frictionless online storefronts with smooth checkout flows, multi-currency support, order notification pipelines and inventory sync.",
+    tag: "High-conversion retail engines",
+  },
+  {
+    icon: Boxes,
+    title: "Inventory, sales & order systems",
+    description:
+      "Custom software to track real-time stock levels, issue digital receipts, log cashier transactions and prevent stock shrinkage.",
+    tag: "Real-time stock & sales control",
+  },
+  {
+    icon: Building2,
+    title: "Custom business management software",
+    description:
+      "Bespoke web applications built around your organisation's exact workflows, employee permissions, approval chains and internal data.",
+    tag: "Tailored operational workflows",
+  },
+  {
+    icon: Bot,
+    title: "AI-powered business automation",
+    description:
+      "Intelligent customer assistants, automated document processing, lead scoring and task routing that reduce operating costs.",
+    tag: "Automated labour savings",
+  },
+  {
+    icon: MessageSquareText,
+    title: "WhatsApp & customer follow-up",
+    description:
+      "Automated WhatsApp integrations for instant payment confirmations, delivery updates, appointment reminders and re-engagement sequences.",
+    tag: "Direct channel engagement",
+  },
+  {
+    icon: BarChart3,
+    title: "Business dashboards & analytics",
+    description:
+      "Executive analytics portals that consolidate payment records, sales trends, inventory turnover and operational KPIs into clear visuals.",
+    tag: "Data-driven decisions",
+  },
+  {
+    icon: CreditCard,
+    title: "Payment integrations & portals",
+    description:
+      "Secure payment gateway setups, customer self-service billing portals, automated invoicing and bank-transfer reconciliation.",
+    tag: "Seamless payment workflows",
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile applications & custom software",
+    description:
+      "Cross-platform iOS and Android applications for field operations, customer self-service and specialised digital product experiences.",
+    tag: "Native cross-platform mobility",
+  },
 ] as const;
 
 const PROCESS = [
   {
     step: "01",
-    title: "Free discovery call",
-    description: "A 15-minute call or WhatsApp chat about your business.",
+    title: "Discover",
+    description:
+      "We clarify the business outcome, review existing assets and document the operational requirements.",
   },
   {
     step: "02",
-    title: "50% deposit to start",
-    description: "Fixed quote, no surprises. You approve the scope first.",
+    title: "Scope",
+    description:
+      "A fixed proposal with deliverables, milestone schedule, payment points and clear completion criteria.",
   },
   {
     step: "03",
-    title: "Build & review",
-    description: "See a live preview within days and give feedback.",
+    title: "Build",
+    description:
+      "Iterative engineering with progress updates, staging previews and thorough quality testing.",
   },
   {
     step: "04",
-    title: "Launch & handover",
-    description: "We deploy, train you, and stay on for support.",
+    title: "Deliver",
+    description:
+      "Production deployment, domain setup, staff walkthroughs, source handoff and optional maintenance plans.",
   },
 ] as const;
+
+const AGENCY_PILLARS = [
+  { icon: Sparkles, label: "Strict NDA protection" },
+  { icon: Code2, label: "Clean, maintainable code" },
+  { icon: Clock3, label: "On-time milestone delivery" },
+] as const;
+
+const CALENDAR_URL = "https://cal.com/eniola-badmus-40skkk/15min";
 
 export default function HomePage() {
   return (
     <div className="pb-24">
       {/* Hero */}
-      <section className="pt-32 sm:pt-40">
-        <div className="section-shell text-center">
-          <Reveal>
-            <p className="font-mono text-xs uppercase tracking-widest text-emerald">
-              Enitech — web &amp; smart systems
-            </p>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              Your business, online and taking bookings — in days
-            </h1>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              We build fast websites, appointment booking systems and call
-              management for small businesses — with fixed prices and no agency
-              markups.
-            </p>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <Button asChild size="lg" variant="gradient">
-                <Link href="/contact">
-                  Get a free quote
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="/services">See pricing</Link>
-              </Button>
-            </div>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-              {[
-                "From ₦50,000",
-                "5-day delivery",
-                "50% deposit to start",
-                "You own everything",
-              ].map((item) => (
-                <span key={item} className="inline-flex items-center gap-1.5">
-                  <Check className="h-4 w-4 text-emerald" />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Offers */}
-      <section aria-labelledby="offers" className="py-24 sm:py-32">
+      <section className="grid-surface relative pt-32 sm:pt-36">
         <div className="section-shell">
-          <SectionHeading
-            eyebrow="What we build"
-            title="One studio, three ways to grow"
-            description="Every project is built for you — designed around how your customers actually find and book you."
-          />
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {OFFERS.map((offer, index) => (
-              <Reveal key={offer.name} delay={index * 0.08}>
-                <div
-                  className={`flex h-full flex-col rounded-2xl border bg-card p-6 shadow-sm sm:p-8 ${
-                    offer.highlighted
-                      ? "border-emerald/50 shadow-xl shadow-emerald/10 ring-1 ring-emerald/30"
-                      : ""
-                  }`}
-                >
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald/10 text-emerald">
-                    <offer.icon className="h-5 w-5" />
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+            <div className="space-y-8 lg:col-span-7">
+              <Reveal>
+                <p className="inline-flex items-center gap-2 rounded-lg border bg-card px-3 py-1 font-mono text-[11px] text-muted-foreground">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-solid opacity-75" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-solid" />
                   </span>
-                  <p className="mt-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                    {offer.name}
-                  </p>
-                  <p className="mt-2 font-display text-2xl font-bold tracking-tight">
-                    {offer.price}
-                  </p>
-                  <p className="mt-1 text-xs font-medium text-emerald">
-                    {offer.timeline}
-                  </p>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {offer.description}
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    {offer.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-center gap-2 text-sm"
-                      >
-                        <Check className="h-4 w-4 shrink-0 text-emerald" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button asChild variant="outline" className="mt-6 w-full rounded-xl">
-                    <Link href={offer.href}>
-                      Learn more
-                      <ArrowUpRight className="h-4 w-4" />
+                  Full-stack digital engineering &amp; white-label capacity
+                </p>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <h1 className="text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl">
+                  Engineering digital products that{" "}
+                  <span className="text-gradient">move businesses forward.</span>
+                </h1>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  We partner with businesses, founders and creative agencies to
+                  design and engineer custom business software, inventory
+                  systems, e-commerce stores, AI automations and web
+                  applications.
+                </p>
+              </Reveal>
+              <Reveal delay={0.15}>
+                <div className="flex flex-wrap gap-2 font-mono text-xs">
+                  {HERO_PILLS.map((pill) => (
+                    <span
+                      key={pill.label}
+                      className={
+                        pill.highlighted
+                          ? "rounded-lg border border-brand/40 bg-brand/10 px-3 py-1.5 font-medium text-brand"
+                          : "rounded-lg border bg-card px-3 py-1.5 font-medium text-muted-foreground"
+                      }
+                    >
+                      {pill.label}
+                    </span>
+                  ))}
+                </div>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <div className="flex flex-wrap items-center gap-4 pt-1">
+                  <Button asChild size="lg" variant="gradient">
+                    <a href="#contact">
+                      Discuss a project
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </Button>
+                  <Button asChild size="lg" variant="outline">
+                    <Link href="/services">
+                      See pricing
+                      <Layers className="h-4 w-4" />
                     </Link>
                   </Button>
                 </div>
               </Reveal>
-            ))}
+              <Reveal delay={0.25}>
+                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+                  {TRUST_ITEMS.map((item) => (
+                    <span key={item} className="inline-flex items-center gap-1.5">
+                      <Check className="h-4 w-4 text-brand" />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.15} className="lg:col-span-5">
+              <HeroConsole />
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Industries */}
-      <section aria-labelledby="industries" className="border-y bg-muted/30 py-24 sm:py-32">
+      {/* Services */}
+      <section id="services" className="py-24 sm:py-28">
         <div className="section-shell">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeading
+            eyebrow="Business outcomes & solutions"
+            title="What we build for our clients"
+            description="Clients don't buy code or frameworks — they hire us to solve operational friction, automate manual work, increase revenue and ship reliable software."
+          />
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((service, index) => (
+              <Reveal key={service.title} delay={(index % 3) * 0.05}>
+                <div className="card-hover flex h-full flex-col justify-between rounded-2xl border bg-card p-6">
+                  <div className="space-y-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-lg border border-brand/25 bg-brand/10 text-brand">
+                      <service.icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="text-lg font-bold leading-snug">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {service.description}
+                    </p>
+                  </div>
+                  <p className="mt-6 border-t pt-3 font-mono text-[11px] font-semibold uppercase tracking-wide text-brand">
+                    {service.tag}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border bg-card p-6 sm:flex-row">
+              <div className="flex items-center gap-4">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border bg-muted text-brand">
+                  <Wrench className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="text-sm font-bold">
+                    Website maintenance &amp; ongoing support
+                  </h3>
+                  <p className="mt-0.5 text-sm text-muted-foreground">
+                    Security monitoring, speed optimisation, updates, bug fixes
+                    and feature additions — monthly care plans.
+                  </p>
+                </div>
+              </div>
+              <Button asChild variant="outline" className="shrink-0">
+                <a href="#contact">
+                  Ask about maintenance
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Selected work */}
+      <section id="work" className="border-y py-24 sm:py-28">
+        <div className="section-shell">
+          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <SectionHeading
-              eyebrow="Live demos"
-              title="Built for your industry"
-              description="We've built booking-ready demos for salons, clinics, gyms, hotels and more — ask for a live link and we'll rebrand it for your business in 48 hours."
+              eyebrow="Selected projects & case studies"
+              title="Engineered software & digital products"
+              description="Case studies span inventory management, healthcare triage, commerce platforms, payment reconciliation and AI workflow automation."
             />
-            <Reveal delay={0.2} className="shrink-0">
-              <Button asChild variant="outline" className="rounded-xl">
+            <Reveal delay={0.1}>
+              <Button asChild variant="outline" className="shrink-0">
                 <Link href="/demos">
-                  Browse demos
-                  <ArrowUpRight className="h-4 w-4" />
+                  Browse live demos
+                  <ExternalLink className="h-4 w-4" />
                 </Link>
               </Button>
             </Reveal>
           </div>
-          <Reveal delay={0.1}>
-            <div className="mt-10 flex flex-wrap justify-center gap-2.5 sm:justify-start">
-              {INDUSTRIES.map((industry) => (
-                <span
-                  key={industry}
-                  className="rounded-full border bg-card px-3.5 py-1.5 text-sm text-muted-foreground shadow-sm"
-                >
-                  {industry}
-                </span>
-              ))}
+          <WorkGrid />
+        </div>
+      </section>
+
+      {/* Agency partnership */}
+      <section id="agency" className="py-20">
+        <div className="section-shell">
+          <Reveal>
+            <div className="rounded-3xl border border-brand-solid/30 bg-[#0b0d10] p-8 sm:p-12">
+              <div className="grid items-center gap-8 lg:grid-cols-12">
+                <div className="space-y-5 lg:col-span-8">
+                  <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-solid">
+                    White-label development capacity for agencies
+                  </p>
+                  <h2 className="text-2xl font-extrabold leading-snug tracking-tight text-white sm:text-3xl lg:text-4xl">
+                    Your development partner behind the scenes.
+                  </h2>
+                  <p className="max-w-2xl text-sm leading-relaxed text-gray-300">
+                    Need extra engineering capacity for a client project? We
+                    support design studios and creative agencies with web
+                    application execution, frontend implementation, custom
+                    e-commerce stores and backend integrations — under strict
+                    NDA protection.
+                  </p>
+                  <div className="grid gap-3 pt-2 font-mono text-xs sm:grid-cols-3">
+                    {AGENCY_PILLARS.map((pillar) => (
+                      <span
+                        key={pillar.label}
+                        className="flex items-center gap-2 rounded-lg border border-white/5 bg-[#151821] p-3 text-gray-300"
+                      >
+                        <pillar.icon className="h-4 w-4 shrink-0 text-brand-solid" />
+                        {pillar.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="lg:col-span-4 lg:justify-end">
+                  <Button asChild size="lg" variant="gradient" className="w-full sm:w-auto">
+                    <a href="#contact">
+                      Discuss agency retainer
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
       {/* Process */}
-      <section aria-labelledby="process" className="py-24 sm:py-32">
+      <section id="process" className="border-y py-24 sm:py-28">
         <div className="section-shell">
           <SectionHeading
-            eyebrow="How it works"
-            title="From first message to live in days"
+            eyebrow="Predictable delivery pipeline"
+            title="How we execute projects"
+            description="Projects begin with clear business requirements, agreed deliverables, realistic timelines and payment milestones."
           />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PROCESS.map((item, index) => (
-              <Reveal key={item.step} delay={index * 0.08}>
-                <div className="h-full rounded-2xl border bg-card p-6 shadow-sm">
-                  <span className="font-mono text-xs text-muted-foreground">
+              <Reveal key={item.step} delay={index * 0.05}>
+                <div className="h-full rounded-2xl border bg-card p-6">
+                  <div className="font-mono text-2xl font-black text-brand">
                     {item.step}
-                  </span>
-                  <p className="mt-3 font-display-sm font-semibold">
-                    {item.title}
-                  </p>
+                  </div>
+                  <h3 className="mt-3 text-base font-bold">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
@@ -258,32 +384,137 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section aria-labelledby="cta" className="py-8">
+      {/* About the founder */}
+      <section id="about" className="grid-surface py-24 sm:py-28">
         <div className="section-shell">
-          <Reveal>
-            <div className="rounded-2xl border bg-card px-6 py-16 text-center shadow-sm sm:px-16 sm:py-20">
-              <p className="font-mono text-xs uppercase tracking-widest text-emerald">
-                Ready when you are
-              </p>
-              <h2 className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-                Let&apos;s get your business online this week
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground">
-                Tell us what you need — a website, bookings on autopilot, or
-                never missing a customer call again — and get a fixed quote
-                today.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                <Button asChild size="lg" variant="gradient">
-                  <Link href="/contact">Get in touch</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline">
-                  <Link href="/services">See full pricing</Link>
-                </Button>
+          <div className="grid items-center gap-12 lg:grid-cols-12">
+            <Reveal className="lg:col-span-5">
+              <div className="rounded-3xl border bg-card p-3">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border bg-[#0b0d10]">
+                  <div
+                    className="grid h-full w-full place-items-center"
+                    aria-hidden
+                  >
+                    <span className="font-mono text-7xl font-black tracking-tighter text-brand-solid sm:text-8xl">
+                      BE
+                    </span>
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 font-mono">
+                    <div className="text-base font-bold text-white">
+                      Badmus Eniola
+                    </div>
+                    <div className="text-xs text-brand-solid">
+                      Founder &amp; Lead Software Engineer
+                    </div>
+                  </div>
+                </div>
               </div>
+            </Reveal>
+
+            <div className="space-y-6 lg:col-span-7">
+              <Reveal>
+                <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand">
+                  Engineering leadership
+                </p>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+                  Hi, I&apos;m Badmus Eniola — founder &amp; lead engineer at
+                  ENITECH.
+                </h2>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="text-sm leading-relaxed text-foreground">
+                  I&apos;m a full-stack software engineer with hands-on
+                  experience building production web applications, inventory
+                  systems, e-commerce stores, mobile apps and AI business
+                  automations — currently shipping healthcare AI at{" "}
+                  <span className="font-semibold text-brand">Aluvity</span>,
+                  with prior engineering work at Carticom, BanffPay and more.
+                </p>
+              </Reveal>
+              <Reveal delay={0.15}>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  I founded ENITECH to give businesses, founders and agencies
+                  reliable, high-standard digital engineering. Practical
+                  software that removes operational bottlenecks, increases
+                  sales — and gives founders peace of mind.
+                </p>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <div className="flex flex-wrap gap-3 pt-1">
+                  <Button asChild variant="outline">
+                    <Link
+                      href={SITE.linkedinUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Linkedin className="h-4 w-4" />
+                      LinkedIn
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <Link
+                      href={SITE.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Github className="h-4 w-4" />
+                      GitHub (@{SITE.github})
+                    </Link>
+                  </Button>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="border-t py-24 sm:py-28">
+        <div className="section-shell">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="space-y-6 lg:col-span-5">
+              <SectionHeading
+                eyebrow="Project inquiries"
+                title="Let's build something built to last."
+                description="Upcoming project, business software requirement, e-commerce store, or agency white-label capacity? Send an inquiry — serious ones get a fixed quote within 24 hours."
+              />
+              <Reveal delay={0.1}>
+                <div className="space-y-3 rounded-2xl border bg-card p-5">
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                    Direct contact
+                  </p>
+                  <CopyEmail />
+                  <p className="text-xs text-muted-foreground">
+                    Prefer to talk first? Book a free 15-minute call —
+                    no pitch, just scope and numbers.{" "}
+                    <a
+                      href={CALENDAR_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-brand underline-offset-4 hover:underline"
+                    >
+                      Pick a time
+                    </a>
+                    .
+                  </p>
+                  <p className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Phone className="h-3.5 w-3.5" />
+                    {SITE.location} · replies within 24h
+                  </p>
+                  <p className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Mail className="h-3.5 w-3.5" />
+                    {SITE.availability}
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.1} className="lg:col-span-7">
+              <InquiryForm />
+            </Reveal>
+          </div>
         </div>
       </section>
     </div>

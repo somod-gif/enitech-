@@ -15,7 +15,7 @@ export function SectionHeading({
   return (
     <div className={cn("max-w-2xl", className)}>
       <Reveal>
-        <p className="mb-2 font-mono text-xs uppercase tracking-widest text-emerald">
+        <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-widest text-brand">
           {eyebrow}
         </p>
       </Reveal>

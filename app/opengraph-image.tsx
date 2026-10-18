@@ -15,7 +15,10 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#1a1a1a",
+          backgroundColor: "#08090b",
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
           fontFamily: "sans-serif",
           padding: "64px 72px",
         }}
@@ -34,39 +37,58 @@ export default function OpengraphImage() {
               justifyContent: "center",
               width: 56,
               height: 56,
-              borderRadius: 999,
-              background: "#fafafa",
-              color: "#1a1a1a",
-              fontSize: 26,
-              fontWeight: 700,
+              borderRadius: 12,
+              background: "#ccff00",
+              color: "#000000",
+              fontSize: 28,
+              fontWeight: 800,
             }}
           >
             E
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontSize: 22, color: "#e4e4e7", fontWeight: 600 }}>
-              enitech
+            <span
+              style={{
+                fontSize: 22,
+                color: "#f4f6f8",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}
+            >
+              ENITECH
             </span>
-            <span style={{ fontSize: 14, color: "#71717a" }}>
-              Websites · Booking · Call management
+            <span style={{ fontSize: 14, color: "#8b93a1" }}>
+              Engineering Studio · Business Software Solutions
             </span>
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <span
             style={{
-              fontSize: 64,
-              color: "white",
-              fontWeight: 700,
+              fontSize: 62,
+              color: "#f4f6f8",
+              fontWeight: 800,
               letterSpacing: "-0.04em",
+              lineHeight: 1.1,
             }}
           >
-            Your business, online
+            Software that moves
           </span>
-          <span style={{ fontSize: 26, color: "#a1a1aa", lineHeight: 1.4 }}>
-            Websites, booking systems and call management — live in days, from
-            NGN 50,000.
+          <span
+            style={{
+              fontSize: 62,
+              color: "#ccff00",
+              fontWeight: 800,
+              letterSpacing: "-0.04em",
+              lineHeight: 1.1,
+            }}
+          >
+            businesses forward.
+          </span>
+          <span style={{ fontSize: 24, color: "#8b93a1", lineHeight: 1.4 }}>
+            Business software · E-commerce · Inventory systems · AI automation
           </span>
         </div>
 
@@ -76,7 +98,7 @@ export default function OpengraphImage() {
             alignItems: "center",
             gap: 10,
             fontSize: 20,
-            color: "#e4e4e7",
+            color: "#f4f6f8",
           }}
         >
           <div
@@ -84,24 +106,11 @@ export default function OpengraphImage() {
               width: 14,
               height: 14,
               borderRadius: 999,
-              background: "#fafafa",
+              background: "#ccff00",
             }}
           />
-          Fixed pricing from NGN 50,000 · 50% deposit to start
+          Projects from NGN 50,000 · Nigeria &amp; worldwide
         </div>
-
-        <div
-          style={{
-            position: "absolute",
-            top: "-25%",
-            right: "-15%",
-            width: 700,
-            height: 700,
-            borderRadius: 999,
-            background:
-              "radial-gradient(circle, rgba(255,255,255,0.14), rgba(255,255,255,0.05) 55%, transparent 70%)",
-          }}
-        />
       </div>
     ),
     { ...size },
